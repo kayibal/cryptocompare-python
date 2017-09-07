@@ -1,6 +1,6 @@
 # get_price_historical.py
 
-from helper_functions import build_url, load_data
+from .helper_functions import build_url, load_data
 
 def get_price_eod(fsym, tsyms, ts, markets='all', try_conversion=True):
 	"""

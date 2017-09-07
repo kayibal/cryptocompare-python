@@ -1,6 +1,6 @@
 # coin_snapshot.py
 
-from helper_functions import build_url, load_data
+from .helper_functions import build_url, load_data
 
 def get_coin_snapshot(fsym, tsym):
 	"""

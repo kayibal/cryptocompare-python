@@ -2,6 +2,7 @@
 
 import json
 import requests
+import pandas as pd
 
 
 def build_url(func, **kwargs):
@@ -41,12 +42,22 @@ def build_url(func, **kwargs):
 			url_parts.append("aggregate={}".format(value))
 		elif key == 'limit' and value != 1440:
 			url_parts.append("limit={}".format(value))
+		elif key == 'allData' and value:
+			url_parts.append("allData=true")
+		elif key == 'toTS':
+			url_parts.append("toTS={}".format(value))
 
 	# put url together
 	url = url + "&".join(url_parts)
-
+	print(url)
 	return url
 
+
+def to_pandas(data, datetime_cols=()):
+	df = pd.DataFrame.from_records(data)
+	for c in datetime_cols:
+		df[c] = pd.to_datetime(df[c], unit='s')
+	return df
 
 def load_data(url):
 	"""
